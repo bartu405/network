@@ -1,0 +1,74 @@
+{% extends "network/layout.html" %}
+
+{% block body %}
+    <div  id="content-wrapper">
+        <div class="root">
+            <h2>Profile of:</h2>
+            <p>{{ profile.username }}</p>
+
+
+            {% if user.is_authenticated and not my_own_profile  %}
+                {% if not following %}     
+                <form action="{% url 'follow' profile.username %}" method="POST" class="follow_form">
+                    {% csrf_token %}
+                    <input type="submit" value="Follow" style="margin-left: 1rem;">
+                </form>
+                {% else %}
+                <form action="{% url 'unfollow' profile.username %}" method="POST" class="follow_form">
+                    {% csrf_token %}
+                    <input type="submit" value="Unfollow" style="margin-left: 1rem;">
+                </form>
+                {% endif %}
+            {% endif %} 
+
+            <p style="margin-left: auto;">{{ profile.followers.count }} followers </p>
+            <p style="margin-left: 1rem; margin-right: 2rem;">{{ profile.following.count }} following</p>
+
+        </div>
+
+        <div id="posts">
+            {% for post in user_posts %}
+                {% include 'network/post.html' %}
+            {% endfor %}
+        </div>
+
+        
+        {% if next %}    
+        <nav aria-label="Post pages" class="nav">
+            <ul class="pagination">
+                {% if not user_posts.has_previous %}
+                    <li class="page-item disabled">
+                        <a class="page-link"  aria-disabled="true">Previous</a>
+                    </li>
+                    
+                {% else %} 
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ user_posts.previous_page_number }}" tabindex="-1" aria-disabled="false">Previous</a>
+                    </li>
+                {% endif %}
+                
+             
+    
+              <li class="page-item">
+                {% if user_posts.has_next %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ user_posts.next_page_number }}" tabindex="1" aria-disabled="false">Next</a>
+                    </li>
+                {% else %} 
+                    <li class="page-item disabled">
+                        <a class="page-link"  aria-disabled="true">Next</a>
+                    </li>
+                {% endif %}
+              </li>
+            </ul>
+    
+            
+            <p>Page {{ user_posts.number }} of {{ user_posts.paginator.num_pages }} </p>
+            
+        </nav>
+        {% endif %} 
+
+
+    </div>
+
+{% endblock %}
