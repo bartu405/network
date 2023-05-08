@@ -1,5 +1,5 @@
 <div class="post" data-id="{{ post.id }}">
-    <div class="post-header">
+    <div class="post-header" style="margin-left: 0.6rem;">
         {% if post.user == user %}
         <p class="edit" data-id="{{ post.id }}" id="edit{{ post.id }}">Edit</p>
         <p class="save" data-id="{{ post.id }}" data-user_id="{{ post.user.id }}" id="save{{ post.id }}" style="display: none;">Save</p>
@@ -8,14 +8,14 @@
         <div class="content" id="content{{ post.id }}">{{ post.content }}</div>
         
 
-        <p class="timestamp">{{ post.timestamp }}</p>
+        <p class="timestamp" style="margin-top: 0.5rem;">{{ post.timestamp }}</p>
     </div>
     
-    <textarea id="txt{{ post.id }}" class="post-text" style="display:none;">{{ post.content }}</textarea>
+    <textarea id="txt{{ post.id }}" class="post-text" style="display:none; border-radius: 0.2rem; margin-bottom: 0.6rem; margin-left: 0.6rem;">{{ post.content }}</textarea>
     <div class="post-actions">
         
         
-        <button class="like-button" data-post-id="{{ post.id }}" style="background-color: #007bff; color: #fff; border: none; padding: 5px 10px; border-radius: 5px; cursor: pointer;">
+        <button class="like-button" data-post-id="{{ post.id }}" style="background-color: #007bff; color: #fff; border: none; padding: 5px 10px; border-radius: 5px; cursor: pointer; margin-left: 0.6rem;">
             {% if user in post.likes.all %}
             Unlike 
             {% else %}
