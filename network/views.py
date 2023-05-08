@@ -17,7 +17,7 @@ from django.core.paginator import Paginator
 
 class NewPost(forms.Form):
     New_Post = forms.CharField(widget=forms.Textarea(attrs={'name':'b', 
-                                                        'style': 'height: 6rem; width: 54.5rem; display:block; border-radius:1rem; padding: 10px; font-size: 16px;'}))
+                                                        'style': 'height: 6rem; width: 100%; display:block; border-radius:1rem; padding: 10px; font-size: 16px;'}))
 
           
 def index(request):

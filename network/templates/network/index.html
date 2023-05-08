@@ -6,7 +6,7 @@
         <h2 style="text-align: center; font-size: 2.4rem;" >All Posts</h2>
 
         {% if user.is_authenticated %}
-            <div>
+            
 
         
             <form action="{% url 'newPost' %}" method="POST" class="form" style="margin-left: 24%; margin-right: 24% ">
@@ -15,7 +15,7 @@
                 <input type="submit" value="Post">
             </form>
     
-            </div>
+            <
         {% endif %}
         
         <div id="posts">
